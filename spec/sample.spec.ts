@@ -7,7 +7,7 @@ module app {
 	beforeEach(angular.mock.module('app'))
 
 	@jasmine.TestSuite("SimpleTest")
-	class TestClass {
+	class SimpleTest {
 
 		constructor(private $http: angular.IHttpService) {
 		}
@@ -33,7 +33,7 @@ module app {
 	}
 
 	@jasmine.TestSuite("DoneTest")
-	class DoneClass {
+	class DoneTest {
 
 		constructor(private $http: angular.IHttpService) {
 		}

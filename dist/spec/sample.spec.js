@@ -11,76 +11,76 @@ var app;
 (function (app) {
     var module = angular.module('app', ['ngMock']);
     beforeEach(angular.mock.module('app'));
-    var TestClass = (function () {
-        function TestClass($http) {
+    var SimpleTest = (function () {
+        function SimpleTest($http) {
             this.$http = $http;
         }
-        TestClass.prototype.after = function () {
+        SimpleTest.prototype.after = function () {
             console.log('after');
             console.log(this.$http);
         };
-        TestClass.prototype.before = function () {
+        SimpleTest.prototype.before = function () {
             console.log('before');
             console.log(this.$http);
         };
-        TestClass.prototype.testCase = function () {
+        SimpleTest.prototype.testCase = function () {
             console.log('testCase');
             console.log(this.$http);
         };
-        Object.defineProperty(TestClass.prototype, "after",
+        Object.defineProperty(SimpleTest.prototype, "after",
             __decorate([
                 jasmine.After
-            ], TestClass.prototype, "after", Object.getOwnPropertyDescriptor(TestClass.prototype, "after")));
-        Object.defineProperty(TestClass.prototype, "before",
+            ], SimpleTest.prototype, "after", Object.getOwnPropertyDescriptor(SimpleTest.prototype, "after")));
+        Object.defineProperty(SimpleTest.prototype, "before",
             __decorate([
                 jasmine.Before
-            ], TestClass.prototype, "before", Object.getOwnPropertyDescriptor(TestClass.prototype, "before")));
-        Object.defineProperty(TestClass.prototype, "testCase",
+            ], SimpleTest.prototype, "before", Object.getOwnPropertyDescriptor(SimpleTest.prototype, "before")));
+        Object.defineProperty(SimpleTest.prototype, "testCase",
             __decorate([
                 jasmine.Test
-            ], TestClass.prototype, "testCase", Object.getOwnPropertyDescriptor(TestClass.prototype, "testCase")));
-        TestClass = __decorate([
+            ], SimpleTest.prototype, "testCase", Object.getOwnPropertyDescriptor(SimpleTest.prototype, "testCase")));
+        SimpleTest = __decorate([
             jasmine.TestSuite("SimpleTest")
-        ], TestClass);
-        return TestClass;
+        ], SimpleTest);
+        return SimpleTest;
     })();
-    var DoneClass = (function () {
-        function DoneClass($http) {
+    var DoneTest = (function () {
+        function DoneTest($http) {
             this.$http = $http;
         }
-        DoneClass.prototype.afterWidhDone = function (done) {
+        DoneTest.prototype.afterWidhDone = function (done) {
             setTimeout(function () {
                 console.log('after with done');
                 done();
             }, 100);
         };
-        DoneClass.prototype.beforeWithDone = function (done) {
+        DoneTest.prototype.beforeWithDone = function (done) {
             setTimeout(function () {
                 console.log('before with done');
                 done();
             }, 100);
         };
-        DoneClass.prototype.testWithDone = function (done) {
+        DoneTest.prototype.testWithDone = function (done) {
             setTimeout(function () {
                 console.log('test with done');
                 done();
             }, 100);
         };
-        Object.defineProperty(DoneClass.prototype, "afterWidhDone",
+        Object.defineProperty(DoneTest.prototype, "afterWidhDone",
             __decorate([
                 jasmine.AfterWithDone
-            ], DoneClass.prototype, "afterWidhDone", Object.getOwnPropertyDescriptor(DoneClass.prototype, "afterWidhDone")));
-        Object.defineProperty(DoneClass.prototype, "beforeWithDone",
+            ], DoneTest.prototype, "afterWidhDone", Object.getOwnPropertyDescriptor(DoneTest.prototype, "afterWidhDone")));
+        Object.defineProperty(DoneTest.prototype, "beforeWithDone",
             __decorate([
                 jasmine.BeforeWithDone
-            ], DoneClass.prototype, "beforeWithDone", Object.getOwnPropertyDescriptor(DoneClass.prototype, "beforeWithDone")));
-        Object.defineProperty(DoneClass.prototype, "testWithDone",
+            ], DoneTest.prototype, "beforeWithDone", Object.getOwnPropertyDescriptor(DoneTest.prototype, "beforeWithDone")));
+        Object.defineProperty(DoneTest.prototype, "testWithDone",
             __decorate([
                 jasmine.TestWithDone
-            ], DoneClass.prototype, "testWithDone", Object.getOwnPropertyDescriptor(DoneClass.prototype, "testWithDone")));
-        DoneClass = __decorate([
+            ], DoneTest.prototype, "testWithDone", Object.getOwnPropertyDescriptor(DoneTest.prototype, "testWithDone")));
+        DoneTest = __decorate([
             jasmine.TestSuite("DoneTest")
-        ], DoneClass);
-        return DoneClass;
+        ], DoneTest);
+        return DoneTest;
     })();
 })(app || (app = {}));
