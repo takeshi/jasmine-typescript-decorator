@@ -11,21 +11,36 @@ var app;
 (function (app) {
     var module = angular.module('app', ['ngMock']);
     beforeEach(angular.mock.module('app'));
+    var SampleService = (function () {
+        function SampleService($timeout) {
+            this.$timeout = $timeout;
+        }
+        SampleService.prototype.invoke = function (cb) {
+            this.$timeout(function () {
+                cb('done');
+            });
+        };
+        return SampleService;
+    })();
+    module.service('sampleService', SampleService);
     var SimpleTest = (function () {
-        function SimpleTest($http) {
-            this.$http = $http;
+        function SimpleTest(sampleService) {
+            this.sampleService = sampleService;
         }
         SimpleTest.prototype.after = function () {
             console.log('after');
-            console.log(this.$http);
         };
         SimpleTest.prototype.before = function () {
             console.log('before');
-            console.log(this.$http);
         };
-        SimpleTest.prototype.testCase = function () {
+        SimpleTest.prototype.testCase = function ($timeout) {
             console.log('testCase');
-            console.log(this.$http);
+            var message = 'init';
+            this.sampleService.invoke(function (out) {
+                message = out;
+            });
+            $timeout.flush();
+            assert.strictEqual('done', message);
         };
         Object.defineProperty(SimpleTest.prototype, "after",
             __decorate([
@@ -45,8 +60,8 @@ var app;
         return SimpleTest;
     })();
     var DoneTest = (function () {
-        function DoneTest($http) {
-            this.$http = $http;
+        function DoneTest(sampleService) {
+            this.sampleService = sampleService;
         }
         DoneTest.prototype.afterWidhDone = function (done) {
             setTimeout(function () {

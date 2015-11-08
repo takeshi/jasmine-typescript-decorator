@@ -5,29 +5,52 @@ module app {
 	var module = angular.module('app', ['ngMock']);
 
 	beforeEach(angular.mock.module('app'))
+	
+	interface SampleCallback{
+		(message:string);
+	}
+	
+	class SampleService{
+		constructor(private $timeout:angular.ITimeoutService){			
+		}
+		invoke(cb:SampleCallback){
+			this.$timeout(()=>{
+				cb('done');
+			});
+		}
+	}
+	
+	module.service('sampleService',SampleService);
+	
 
 	@jasmine.TestSuite("SimpleTest")
 	class SimpleTest {
 
-		constructor(private $http: angular.IHttpService) {
+		constructor(private sampleService:SampleService) {
 		}
 
 		@jasmine.After
 		after() {
 			console.log('after');
-			console.log(this.$http);
 		}
 
 		@jasmine.Before
 		before() {
 			console.log('before');
-			console.log(this.$http);
 		}
 
 		@jasmine.Test
-		testCase() {
+		testCase($timeout:angular.ITimeoutService) {
 			console.log('testCase');
-			console.log(this.$http);
+			
+			var message = 'init';
+			this.sampleService.invoke((out)=>{
+				message = out;
+			});
+			$timeout.flush();
+
+			assert.strictEqual('done',message);
+			
 		}
 
 	}
@@ -35,8 +58,9 @@ module app {
 	@jasmine.TestSuite("DoneTest")
 	class DoneTest {
 
-		constructor(private $http: angular.IHttpService) {
+		constructor(private sampleService:SampleService) {
 		}
+
 
 		@jasmine.AfterWithDone
 		afterWidhDone(done: Function) {
@@ -55,7 +79,7 @@ module app {
 		}
 
 		@jasmine.TestWithDone
-		testWithDone(done: Function) {
+		testWithDone(done: Function) {			
 			setTimeout(() => {
 				console.log('test with done');
 				done();
