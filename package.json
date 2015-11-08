@@ -1,0 +1,15 @@
+{
+  "name": "jasmine-typescript-decrator",
+  "version": "0.0.1",
+  "description": "TypeScript Decorator for Karma",
+  "dependencies": {},
+  "devDependencies": {
+    "karma": "latest",
+    "karma-jasmine": "^0.3.6",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-typescript-preprocessor": "0.0.21",
+    "typescript": "^1.6.2"
+  },
+  
+  "license": "MIT"
+}
