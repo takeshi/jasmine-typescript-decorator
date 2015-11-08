@@ -1,5 +1,5 @@
 {
-  "name": "jasmine-typescript-decrator",
+  "name": "jasmine-typescript-decorator",
   "version": "0.0.1",
   "description": "TypeScript Decorator for Karma",
   "dependencies": {},
