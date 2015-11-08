@@ -1,4 +1,4 @@
-/// <reference path="../src/decrator.ts" />
+/// <reference path="../src/decorator.ts" />
 
 module app {
 
